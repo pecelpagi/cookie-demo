@@ -4,26 +4,27 @@ const app = express();
 const PORT = 3300;
 
 app.get('/set-cookie', (req, res) => {
-    res.cookie('SET_COOKIE_FROM_SERVER', 'ini_adalah_data_cookie_dari_server', {
+    res.cookie('COOKIE_LANGUAGE', 'bahasa_indonesia');
+
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 1); // expire dalam 1 hari
+
+    res.cookie('COOKIE_TOKEN', 'abcdefg123456hijkl', {
         secure: true,
         httpOnly: true,
+        expires
     });
 
-    res.json({
-        status: true,
-        message: 'OK'
-    })
+    res.redirect("/");
 });
 
 app.get('/', (req, res) => {
     res.json({
         status: true,
-        message: req.cookies
+        cookie_data: req.headers.cookie,
     })
 });
 
 app.listen(PORT, () => {
     console.log('App listening on port %s', PORT);
-})
-
-module.exports = app
+});

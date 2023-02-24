@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Storage Demo</title>
+</head>
+
+<body>
+    <script>
+        function getValue() {
+            return localStorage.getItem("LOCAL_STORAGE_EXAMPLE");
+        };
+        const isEmpty = !getValue();
+
+        document.body.innerHTML = isEmpty ? 'Mohon tunggu sebentar.. sedang membuat data' : getValue();
+
+        if (isEmpty) {
+            setTimeout(function () {
+                localStorage.setItem("LOCAL_STORAGE_EXAMPLE", "local storage contoh data");
+                document.body.innerHTML = getValue();
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>
